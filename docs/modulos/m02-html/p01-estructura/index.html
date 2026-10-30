@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!-- =====================================================================
+     Práctica 1 — Estructura básica de un documento HTML
+     Sitio de la Clínica Veterinaria ConSentidos
+     Desarrollo de Software V · Módulo II · Unidad 2 (secciones 2.1 a 2.3)
+     ===================================================================== -->
+<html lang="es">
+
+<head>
+  <!-- Codificación: debe ir dentro de los primeros 1024 bytes del documento.
+       Sin ella, las tildes y las eñes pueden mostrarse como símbolos extraños. -->
+  <meta charset="UTF-8">
+
+  <!-- Encuadre en pantallas pequeñas: ancho del dispositivo y escala inicial 1. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Resumen del contenido: es el texto que suelen mostrar los buscadores. -->
+  <meta name="description"
+        content="Clínica Veterinaria ConSentidos en Santiago de Veraguas: consulta, vacunación y cirugía para perros y gatos.">
+
+  <!-- Autoría de la página. Escribe aquí tu nombre completo. -->
+  <meta name="author" content="Alberto Adames">
+
+  <!-- Título: se ve en la pestaña y en los marcadores. Es único por página. -->
+  <title>Inicio | Clínica Veterinaria ConSentidos</title>
+
+  <!-- Icono de la pestaña. -->
+  <link rel="icon" href="assets/img/logo-consentidos.svg" type="image/svg+xml">
+
+  <!-- Hoja de estilos: el HTML no define la presentación, solo la estructura. -->
+  <link rel="stylesheet" href="assets/css/consentidos.css">
+</head>
+
+<body>
+  <!-- Primer enlace del documento: permite saltar la navegación con el teclado.
+       Está oculto hasta que recibe el foco con la tecla Tab. -->
+  <a href="#contenido">Saltar al contenido</a>
+
+  <!-- CABECERA ==========================================================
+       El <hgroup> agrupa el título de la página con un párrafo que actúa
+       como subtítulo. El segundo <p>, hijo directo del <header>, lleva tus
+       datos y debe quedar siempre visible en la parte superior. -->
+  <header id="inicio">
+    <img src="assets/img/logo-consentidos.svg" alt="" width="64" height="64">
+
+    <hgroup>
+      <h1>Clínica Veterinaria ConSentidos</h1>
+      <p>Cuidamos a tu mascota como de la familia</p>
+    </hgroup>
+
+    <p>
+      Alberto Adames<br>
+      4GS122-00
+    </p>
+  </header>
+
+  <!-- NAVEGACIÓN ========================================================-
+       Por ahora enlaza las secciones de esta misma página. En la Práctica 2
+       se ampliará con las demás páginas del sitio. -->
+  <nav aria-label="Secciones de esta página">
+    <h2>En esta página</h2>
+    <ul>
+      <li><a href="#servicios">Nuestros servicios</a></li>
+      <li><a href="#consejos">Consejos de cuidado</a></li>
+    </ul>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL ================================================-
+       Solo puede haber un <main> visible por página: es el contenido propio
+       de este documento, sin la cabecera, la navegación ni el pie. -->
+  <main id="contenido">
+
+    <!-- Una <section> agrupa contenido relacionado y empieza por su título.
+         A diferencia de <article>, no tiene sentido fuera de esta página. -->
+    <section id="servicios">
+      <h2>Nuestros servicios</h2>
+      <p>
+        Atendemos consulta general, vacunación, desparasitación, cirugía
+        programada y urgencias. El detalle de cada servicio y sus tarifas se
+        agregará en las siguientes prácticas del módulo.
+      </p>
+    </section>
+
+    <section id="consejos">
+      <h2>Consejos de cuidado</h2>
+      <p>
+        Publicamos recomendaciones sobre alimentación, calendario de vacunas y
+        señales de alarma que conviene revisar antes de pedir una cita.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- CONTENIDO RELACIONADO ==============================================
+       <aside> es información tangencial: acompaña al contenido principal,
+       pero se entiende por separado. -->
+  <aside>
+    <h2>Horario de atención</h2>
+    <p>
+      Lunes a viernes de 8:00 a. m. a 6:00 p. m.<br>
+      Sábados de 8:00 a. m. a 12:00 m.<br>
+      Urgencias: las 24 horas por teléfono.
+    </p>
+  </aside>
+
+  <!-- PIE DE PÁGINA ======================================================-
+       <address> es el elemento correcto para los datos de contacto del
+       responsable del contenido; no para cualquier dirección postal. -->
+  <footer>
+    <address>
+      <strong>Clínica Veterinaria ConSentidos</strong><br>
+      Avenida Central, Santiago de Veraguas, Panamá<br>
+      <a href="tel:+50799800000">+507 998-0000</a> |
+      <a href="mailto:citas@consentidos.example">citas@consentidos.example</a>
+    </address>
+
+    <p>
+      Última actualización:
+      <time datetime="2026-10-22">22 de octubre de 2026</time>.
+    </p>
+
+    <p><a href="#inicio">Volver arriba</a></p>
+
+    <p>
+      <small>
+        &copy; 2026 Clínica Veterinaria ConSentidos. Proyecto académico del
+        curso Desarrollo de Software V, Universidad Tecnológica de Panamá,
+        Centro Regional de Veraguas. Los datos de contacto son ficticios.
+      </small>
+    </p>
+  </footer>
+</body>
+
+</html>

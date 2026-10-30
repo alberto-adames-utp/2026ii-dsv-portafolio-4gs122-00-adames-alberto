@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+        content="Práctica 1 del Módulo I: taller de Git sobre el proyecto ConSentidos.">
+  <meta name="author" content="Alberto Adames">
+  <title>Módulo I · Práctica 1 | Alberto Adames</title>
+  <link rel="stylesheet" href="../../../assets/css/entregas.css">
+</head>
+
+<body>
+  <a href="#contenido">Saltar al contenido</a>
+
+  <header>
+    <hgroup>
+      <h1>Práctica 1</h1>
+      <p>Módulo I · Taller de Git sobre el proyecto ConSentidos</p>
+    </hgroup>
+    <p>
+      Alberto Adames<br>
+      4GS122-00
+    </p>
+  </header>
+
+  <nav aria-label="Navegación del portafolio">
+    <h2>Dónde estás</h2>
+    <ul>
+      <li><a href="../../../index.html">Página personal</a></li>
+      <li><a href="../../index.html">Mis entregas</a></li>
+      <li><a href="../index.html">Módulo I</a></li>
+    </ul>
+  </nav>
+
+  <main id="contenido">
+    <p class="intro">
+      La práctica del Módulo I es un taller: se trabaja con la terminal abierta
+      sobre un repositorio local del proyecto ConSentidos. No produce una página
+      publicada, sino un repositorio con historia propia. Esta página documenta
+      lo que hice y lo que aprendí.
+    </p>
+
+    <section>
+      <h2>El flujo que practiqué</h2>
+      <ul class="estudiantes">
+        <li>
+          <article>
+            <p class="codigo">1</p>
+            <h3>Crear el repositorio</h3>
+            <p class="repo">
+              <code>git init</code> sobre la carpeta del proyecto, configurar
+              <code>user.name</code> y <code>user.email</code>, y comprobar el
+              estado con <code>git status</code>.
+            </p>
+          </article>
+        </li>
+        <li>
+          <article>
+            <p class="codigo">2</p>
+            <h3>Las tres zonas</h3>
+            <p class="repo">
+              Entender la diferencia entre el directorio de trabajo, el área de
+              preparación y el repositorio: <code>git add</code> y
+              <code>git commit</code> dejan de ser magia.
+            </p>
+          </article>
+        </li>
+        <li>
+          <article>
+            <p class="codigo">3</p>
+            <h3>Historia y diferencias</h3>
+            <p class="repo">
+              <code>git log</code>, <code>git diff</code> y
+              <code>git show</code> para leer qué cambió, cuándo y por qué.
+            </p>
+          </article>
+        </li>
+        <li>
+          <article>
+            <p class="codigo">4</p>
+            <h3>Ramas y fusión</h3>
+            <p class="repo">
+              Crear una rama para una función nueva, trabajar en ella y
+              fusionarla en <code>main</code> sin perder nada.
+            </p>
+          </article>
+        </li>
+        <li>
+          <article>
+            <p class="codigo">5</p>
+            <h3>Deshacer</h3>
+            <p class="repo">
+              Recuperar un archivo borrado por error y revertir un commit:
+              la parte que más tranquilidad da.
+            </p>
+          </article>
+        </li>
+        <li>
+          <article>
+            <p class="codigo">6</p>
+            <h3>Ignorar lo que no se versiona</h3>
+            <p class="repo">
+              El archivo <code>.gitignore</code> y por qué no todo lo que está
+              en la carpeta debe entrar en el repositorio.
+            </p>
+          </article>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Lo que me llevé</h2>
+      <ul class="estudiantes">
+        <li>
+          <article>
+            <p class="codigo">Lo que más me costó</p>
+            <h3>Distinguir el área de preparación</h3>
+            <p class="repo">
+              Durante los primeros ejercicios hacía <code>git commit</code> sin
+              <code>git add</code> y no entendía por qué no pasaba nada.
+              Ver el <code>git status</code> después de cada paso fue lo que me
+              lo aclaró.
+            </p>
+          </article>
+        </li>
+        <li>
+          <article>
+            <p class="codigo">Lo que cambió mi forma de trabajar</p>
+            <h3>Commits pequeños y con mensaje</h3>
+            <p class="repo">
+              Antes guardaba copias con nombres como <i>final2</i> y
+              <i>final-bueno</i>. Ahora el historial cuenta qué hice y puedo
+              volver a cualquier punto.
+            </p>
+          </article>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">Volver al Módulo I</a></p>
+    <p>
+      <small>&copy; 2026 Alberto Adames. Portafolio académico de la asignatura
+      Desarrollo de Software V, Universidad Tecnológica de Panamá, Centro
+      Regional de Veraguas.</small>
+    </p>
+  </footer>
+</body>
+
+</html>

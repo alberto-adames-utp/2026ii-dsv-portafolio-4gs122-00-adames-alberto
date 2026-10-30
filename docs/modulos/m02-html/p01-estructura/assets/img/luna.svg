@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" width="320" height="240">
+  <!-- Ilustración original: Luna, gata gris atigrada, sentada -->
+  <rect width="320" height="240" fill="#DDEEE5"/>
+  <ellipse cx="160" cy="222" rx="92" ry="10" fill="#2E6A4F" opacity=".18"/>
+  <path d="M214 205c40-6 52-40 34-64" fill="none" stroke="#6B7280" stroke-width="14" stroke-linecap="round"/>
+  <path d="M112 215c-6-50 12-92 48-92s54 42 48 92z" fill="#8A94A6"/>
+  <path d="M136 150c14 8 34 8 48 0M130 172c18 9 42 9 60 0M127 194c20 9 46 9 66 0" fill="none" stroke="#5B6474" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="138" cy="214" rx="16" ry="9" fill="#9CA5B5"/>
+  <ellipse cx="182" cy="214" rx="16" ry="9" fill="#9CA5B5"/>
+  <path d="M118 62l12-40 26 28zM202 62l-12-40-26 28z" fill="#8A94A6"/>
+  <path d="M126 55l6-22 14 16zM194 55l-6-22-14 16z" fill="#E8B4B8"/>
+  <circle cx="160" cy="86" r="48" fill="#8A94A6"/>
+  <path d="M146 44l4 16M160 40v18M174 44l-4 16" stroke="#5B6474" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="141" cy="84" rx="9" ry="11" fill="#F4C45A"/>
+  <ellipse cx="179" cy="84" rx="9" ry="11" fill="#F4C45A"/>
+  <ellipse cx="141" cy="85" rx="3" ry="8" fill="#14233A"/>
+  <ellipse cx="179" cy="85" rx="3" ry="8" fill="#14233A"/>
+  <path d="M154 102h12l-6 7z" fill="#C9737B"/>
+  <path d="M160 109c-2 7-10 8-14 4M160 109c2 7 10 8 14 4" fill="none" stroke="#14233A" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M132 104l-30-6M132 110l-30 4M188 104l30-6M188 110l30 4" stroke="#F3F6F9" stroke-width="2" stroke-linecap="round"/>
+</svg>

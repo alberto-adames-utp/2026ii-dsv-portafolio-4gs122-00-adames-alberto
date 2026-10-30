@@ -1,0 +1,927 @@
+/* =====================================================================
+   consentidos.css — Hoja de estilos del sitio Clínica Veterinaria ConSentidos
+   Desarrollo de Software V · Módulo II · Universidad Tecnológica de Panamá
+
+   Cómo usarla
+   - Enlázala en el <head> de cada página:
+       <link rel="stylesheet" href="assets/css/consentidos.css">
+   - Estiliza el HTML semántico casi sin clases. Si marcas bien la página
+     (header, nav, main, section, article, footer...), se verá bien.
+   - Única clase: .demo (área de demostración en la guía de componentes).
+
+   Criterios de diseño
+   - Contraste WCAG 2.2 AA: 4,5:1 en texto y 3:1 en controles.
+   - Foco visible en todo lo interactivo; áreas de toque de 44 px o más.
+   - Diseño adaptable desde el móvil; modo oscuro según el sistema.
+   - Respeta la preferencia de reducir animaciones.
+
+   Esta hoja se estudia y se modifica en el Módulo III (CSS).
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   1. Tipografías (Atkinson Hyperlegible, diseñada para máxima legibilidad).
+      Si no hay conexión, se usan las fuentes del sistema.
+   --------------------------------------------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;700&display=swap");
+
+/* ---------------------------------------------------------------------
+   2. Variables de diseño (tokens): colores, tipografía y espaciado.
+      Cambiar un valor aquí cambia todo el sitio.
+   --------------------------------------------------------------------- */
+:root {
+  color-scheme: light dark;
+
+  /* Paleta */
+  --tinta: #14233A;          /* azul noche: texto y cabecera */
+  --marino: #1E4270;         /* azul marino: enlaces y botones */
+  --marino-claro: #DCE6F3;
+  --salvia: #2E6A4F;         /* verde salvia: notas y confirmaciones */
+  --salvia-claro: #E3F0E9;
+  --ambar: #F4C45A;          /* ámbar: resaltado y foco */
+  --rojo: #B42318;           /* errores de formulario */
+  --fondo: #F3F6F9;
+  --superficie: #FFFFFF;
+  --borde: #CBD5E1;
+  --borde-control: #6B7A90;  /* borde de campos: 3:1 sobre blanco */
+  --texto: #14233A;
+  --texto-suave: #475467;
+  --codigo-fondo: #14233A;
+  --codigo-texto: #E6EDF6;
+  --cabecera-fondo: #14233A;
+  --cabecera-texto: #F3F6F9;
+  --cabecera-suave: #C9D6E8;
+  --foco: #1E4270;
+
+  /* Tipografía */
+  --fuente: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fuente-mono: "Atkinson Hyperlegible Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+
+  /* Espaciado en múltiplos de 8 px */
+  --e1: 0.5rem;
+  --e2: 1rem;
+  --e3: 1.5rem;
+  --e4: 2rem;
+  --e6: 3rem;
+  --radio: 6px;
+  --ancho-lectura: 70ch;
+}
+
+/* Modo oscuro: solo se redefinen los colores */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --marino: #8DB7EC;
+    --marino-claro: #1F3553;
+    --salvia: #7CC4A0;
+    --salvia-claro: #173427;
+    --rojo: #F97066;
+    --fondo: #0F1A2B;
+    --superficie: #16243A;
+    --borde: #2C3E57;
+    --borde-control: #8A9BB3;
+    --texto: #E6EDF6;
+    --texto-suave: #A9B6C8;
+    --codigo-fondo: #0A1320;
+    --cabecera-fondo: #0A1320;
+    --foco: #F4C45A;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   3. Base del documento
+   --------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--fuente);
+  font-size: 1rem;           /* 16 px: tamaño mínimo cómodo de lectura */
+  line-height: 1.6;
+  color: var(--texto);
+  background-color: var(--fondo);
+}
+
+/* Los destinos de las anclas no quedan pegados al borde superior */
+[id] {
+  scroll-margin-top: var(--e3);
+}
+
+/* ---------------------------------------------------------------------
+   4. Distribución general (grid): cabecera, índice, contenido y pie.
+      En pantallas anchas el índice queda fijo a la izquierda.
+   --------------------------------------------------------------------- */
+body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "cabecera"
+    "indice"
+    "contenido"
+    "lateral"
+    "pie";
+  min-height: 100vh;
+  grid-template-rows: auto auto 1fr auto auto;
+}
+
+body > header { grid-area: cabecera; }
+body > nav    { grid-area: indice; }
+body > main   { grid-area: contenido; }
+body > aside  { grid-area: lateral; }
+body > footer { grid-area: pie; }
+
+@media (min-width: 60rem) {
+  body {
+    grid-template-columns: 16rem minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto auto;
+    grid-template-areas:
+      "cabecera cabecera"
+      "indice   contenido"
+      "indice   lateral"
+      "pie      pie";
+  }
+}
+
+/* ---------------------------------------------------------------------
+   4.1 Contenido lateral (<aside>): acompaña al contenido principal.
+   --------------------------------------------------------------------- */
+body > aside {
+  margin: 0 var(--e3) var(--e3);
+  padding: var(--e3);
+  border-left: 4px solid var(--ambar);
+  border-radius: var(--radio);
+  background-color: var(--marino-claro);
+}
+
+body > aside > :first-child {
+  margin-top: 0;
+}
+
+body > aside > :last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 60rem) {
+  body > aside {
+    margin-inline: var(--e4);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   5. Enlace para saltar al contenido (accesibilidad con teclado).
+      Es el primer enlace del <body>; aparece al recibir el foco.
+   --------------------------------------------------------------------- */
+body > a:first-child {
+  position: absolute;
+  top: -10rem;
+  left: var(--e2);
+  z-index: 10;
+  padding: var(--e1) var(--e2);
+  border-radius: var(--radio);
+  background-color: var(--ambar);
+  color: #14233A;
+  font-weight: 700;
+}
+
+body > a:first-child:focus {
+  top: var(--e2);
+}
+
+/* ---------------------------------------------------------------------
+   6. Cabecera del sitio
+   --------------------------------------------------------------------- */
+body > header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--e2);
+  padding: var(--e4) var(--e3);
+  background-color: var(--cabecera-fondo);
+  color: var(--cabecera-texto);
+}
+
+body > header img {
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+@media (min-width: 40rem) {
+  body > header img {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+body > header h1 {
+  margin: 0;
+  font-size: clamp(1.75rem, 1.2rem + 2.4vw, 2.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+body > header p {
+  margin: var(--e1) 0 0;
+  color: var(--cabecera-suave);
+  font-size: 1.125rem;
+}
+
+body > header a {
+  color: var(--cabecera-texto);
+}
+
+/* Datos del estudiante: el <p> que es hijo directo del <header>
+   (el subtítulo del sitio va dentro del <hgroup>, no aquí).
+   margin-inline-start: auto lo empuja al extremo opuesto del logotipo. */
+body > header > p {
+  margin: 0;
+  margin-inline-start: auto;
+  padding-left: var(--e2);
+  border-left: 3px solid var(--ambar);
+  color: var(--cabecera-texto);
+  font-size: 1rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+@media (min-width: 60rem) {
+  body > header {
+    padding-inline: var(--e4);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   7. Navegación / índice
+   --------------------------------------------------------------------- */
+body > nav {
+  padding: var(--e2) var(--e3);
+  border-bottom: 1px solid var(--borde);
+  background-color: var(--superficie);
+}
+
+body > nav h2 {
+  margin: 0 0 var(--e1);
+  font-size: 1rem;
+  color: var(--texto-suave);
+}
+
+body > nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body > nav a {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;          /* 44 px: área de toque cómoda */
+  padding: 0 var(--e1);
+  border-radius: var(--radio);
+  color: var(--texto);
+  text-decoration: none;
+}
+
+body > nav a:hover {
+  background-color: var(--marino-claro);
+}
+
+body > nav > ul > li > a {
+  font-weight: 700;
+}
+
+body > nav ul ul a {
+  min-height: 2.25rem;
+  padding-left: var(--e3);
+  color: var(--texto-suave);
+}
+
+/* Móvil: solo las secciones principales, en una fila que se ajusta */
+@media (max-width: 59.99rem) {
+  body > nav ul ul {
+    display: none;
+  }
+
+  body > nav > ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e1);
+  }
+
+  body > nav > ul > li > a {
+    padding: 0 var(--e2);
+    border: 1px solid var(--borde);
+  }
+}
+
+@media (min-width: 60rem) {
+  body > nav {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    max-height: 100vh;
+    overflow-y: auto;
+    padding: var(--e4) var(--e2);
+    border-bottom: 0;
+    border-right: 1px solid var(--borde);
+  }
+
+  body > nav > ul > li + li {
+    margin-top: var(--e1);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   8. Contenido principal: secciones y artículos
+   --------------------------------------------------------------------- */
+main {
+  padding: var(--e4) var(--e3) var(--e6);
+}
+
+main > * {
+  max-width: 50rem;
+}
+
+@media (min-width: 60rem) {
+  main {
+    padding-inline: var(--e6);
+  }
+}
+
+main > p:first-child {
+  margin-top: 0;
+  font-size: 1.125rem;
+  color: var(--texto-suave);
+}
+
+main > section + section {
+  margin-top: var(--e6);
+}
+
+section > h2 {
+  margin: 0 0 var(--e2);
+  padding-bottom: var(--e1);
+  border-bottom: 3px solid var(--marino);
+  font-size: 1.75rem;
+  line-height: 1.2;
+  color: var(--texto);
+}
+
+article {
+  padding: var(--e4) 0;
+}
+
+article + article {
+  border-top: 1px solid var(--borde);
+}
+
+article > h3 {
+  margin: 0 0 var(--e1);
+  font-size: 1.375rem;
+  line-height: 1.25;
+}
+
+article > p {
+  margin: 0 0 var(--e2);
+  max-width: var(--ancho-lectura);
+}
+
+/* ---------------------------------------------------------------------
+   9. Títulos generales y texto
+   --------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+h4 { font-size: 1.25rem;  margin: var(--e2) 0 var(--e1); }
+h5 { font-size: 1.0625rem; margin: var(--e2) 0 var(--e1); }
+h6 { font-size: 1rem;     margin: var(--e2) 0 var(--e1); color: var(--texto-suave); }
+
+p {
+  margin: 0 0 var(--e2);
+}
+
+strong {
+  font-weight: 700;
+}
+
+mark {
+  padding: 0 0.15em;
+  border-radius: 3px;
+  background-color: var(--ambar);
+  color: #14233A;
+}
+
+/* ---------------------------------------------------------------------
+   10. Enlaces
+   --------------------------------------------------------------------- */
+a {
+  color: var(--marino);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  text-decoration-thickness: 0.16em;
+}
+
+/* Foco visible para teclado en todos los elementos interactivos */
+:focus-visible {
+  outline: 3px solid var(--foco);
+  outline-offset: 2px;
+}
+
+body > header :focus-visible,
+body > footer :focus-visible {
+  outline-color: var(--ambar);
+}
+
+/* ---------------------------------------------------------------------
+   11. Código
+   --------------------------------------------------------------------- */
+code {
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background-color: var(--marino-claro);
+  font-family: var(--fuente-mono);
+  font-size: 0.9em;
+}
+
+pre {
+  margin: 0 0 var(--e2);
+  padding: var(--e2) var(--e3);
+  overflow-x: auto;             /* el código largo se desplaza, no rompe la página */
+  border-radius: var(--radio);
+  background-color: var(--codigo-fondo);
+  color: var(--codigo-texto);
+  font-family: var(--fuente-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+pre code {
+  padding: 0;
+  background: none;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* ---------------------------------------------------------------------
+   12. Área de demostración (.demo) de la guía de componentes.
+       La demo y su código se leen como una sola pieza.
+   --------------------------------------------------------------------- */
+.demo {
+  padding: var(--e3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio) var(--radio) 0 0;
+  background-color: var(--superficie);
+}
+
+.demo > :first-child {
+  margin-top: 0;
+}
+
+.demo > :last-child {
+  margin-bottom: 0;
+}
+
+.demo + pre {
+  border-radius: 0 0 var(--radio) var(--radio);
+}
+
+/* ---------------------------------------------------------------------
+   13. Notas de uso: <aside> dentro de un artículo
+   --------------------------------------------------------------------- */
+article aside {
+  margin-top: var(--e2);
+  padding: var(--e2) var(--e3);
+  border-left: 4px solid var(--salvia);
+  border-radius: 0 var(--radio) var(--radio) 0;
+  background-color: var(--salvia-claro);
+  max-width: var(--ancho-lectura);
+}
+
+article aside p {
+  margin: 0;
+}
+
+article aside p + p {
+  margin-top: var(--e1);
+}
+
+/* ---------------------------------------------------------------------
+   14. Listas
+   --------------------------------------------------------------------- */
+ul, ol {
+  margin: 0 0 var(--e2);
+  padding-left: var(--e3);
+}
+
+li + li,
+li > ul,
+li > ol {
+  margin-top: 0.25rem;
+}
+
+li > ul,
+li > ol {
+  margin-bottom: 0;
+}
+
+li::marker {
+  color: var(--marino);
+  font-weight: 700;
+}
+
+dl {
+  margin: 0 0 var(--e2);
+}
+
+dt {
+  font-weight: 700;
+}
+
+dd {
+  margin: 0.25rem 0 var(--e2);
+  padding-left: var(--e2);
+  border-left: 3px solid var(--marino-claro);
+}
+
+/* ---------------------------------------------------------------------
+   15. Imágenes y multimedia
+   --------------------------------------------------------------------- */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+img {
+  display: block;
+}
+
+video,
+iframe,
+object {
+  display: block;
+  border-radius: var(--radio);
+}
+
+iframe,
+object {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid var(--borde);
+  background-color: var(--superficie);
+}
+
+iframe {
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
+
+audio {
+  display: block;
+  width: 100%;
+  max-width: 28rem;
+}
+
+figure {
+  margin: 0;
+}
+
+figure img {
+  border-radius: var(--radio);
+}
+
+figcaption {
+  margin-top: var(--e1);
+  font-size: 0.9375rem;
+  color: var(--texto-suave);
+}
+
+/* ---------------------------------------------------------------------
+   16. Elementos interactivos: details, meter y progress
+   --------------------------------------------------------------------- */
+details {
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background-color: var(--superficie);
+}
+
+details + details {
+  margin-top: var(--e1);
+}
+
+summary {
+  display: list-item;
+  min-height: 2.75rem;
+  padding: var(--e1) var(--e2);
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 1.75rem;
+}
+
+summary::marker {
+  color: var(--marino);
+}
+
+details[open] > summary {
+  border-bottom: 1px solid var(--borde);
+}
+
+details > :not(summary) {
+  margin: var(--e2);
+}
+
+meter,
+progress {
+  width: min(100%, 16rem);
+  height: 1.25rem;
+  vertical-align: middle;
+  accent-color: var(--marino);
+}
+
+output {
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------------------------
+   17. Botones
+   --------------------------------------------------------------------- */
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  min-height: 2.75rem;
+  padding: 0 var(--e3);
+  border: 2px solid var(--marino);
+  border-radius: var(--radio);
+  background-color: var(--marino);
+  color: #FFFFFF;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+  button,
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"] {
+    color: #0F1A2B;
+  }
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+  filter: brightness(1.15);
+}
+
+button:active,
+input[type="submit"]:active,
+input[type="button"]:active {
+  transform: translateY(1px);
+}
+
+/* Acción secundaria: botón de restablecer */
+button[type="reset"],
+input[type="reset"] {
+  background-color: transparent;
+  color: var(--marino);
+}
+
+button:disabled,
+input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ---------------------------------------------------------------------
+   18. Tablas (Práctica 3)
+   --------------------------------------------------------------------- */
+/* Si la tabla va dentro de un <div>, este se desplaza en pantallas angostas */
+div:has(> table) {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--superficie);
+  font-variant-numeric: tabular-nums;
+}
+
+caption {
+  padding-bottom: var(--e1);
+  text-align: left;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+th,
+td {
+  padding: 0.75rem var(--e2);
+  border-bottom: 1px solid var(--borde);
+  text-align: left;
+  vertical-align: top;
+}
+
+thead th {
+  background-color: var(--marino-claro);
+  border-bottom: 2px solid var(--marino);
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--fondo);
+}
+
+tfoot th,
+tfoot td {
+  border-top: 2px solid var(--marino);
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------------------------
+   19. Formularios (Práctica 4)
+   --------------------------------------------------------------------- */
+fieldset {
+  margin: 0 0 var(--e3);
+  padding: var(--e2) var(--e3) var(--e3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background-color: var(--superficie);
+}
+
+/* Etiqueta dentro de un párrafo (por ejemplo, junto a meter o progress) */
+p > label:first-child {
+  margin-top: 0;
+}
+
+legend {
+  padding: 0 var(--e1);
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+label {
+  display: block;
+  margin: var(--e2) 0 0.25rem;
+  font-weight: 700;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  max-width: 32rem;
+  min-height: 2.75rem;
+  padding: var(--e1) 0.75rem;
+  border: 1px solid var(--borde-control);
+  border-radius: var(--radio);
+  background-color: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+}
+
+textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+/* Casillas y opciones: tamaño cómodo, etiqueta a la derecha */
+input[type="checkbox"],
+input[type="radio"] {
+  width: 1.25rem;
+  min-height: 1.25rem;
+  height: 1.25rem;
+  margin: 0 var(--e1) 0 0;
+  vertical-align: middle;
+  accent-color: var(--marino);
+}
+
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+  display: inline;
+  margin: 0 var(--e2) 0 0;
+  font-weight: 400;
+}
+
+input[type="range"] {
+  padding: 0;
+  border: 0;
+  accent-color: var(--marino);
+}
+
+input[type="color"] {
+  width: 4rem;
+  padding: 0.25rem;
+}
+
+::placeholder {
+  color: var(--texto-suave);
+  opacity: 1;
+}
+
+/* Error de validación, solo después de que la persona interactúa */
+input:user-invalid,
+select:user-invalid,
+textarea:user-invalid {
+  border: 2px solid var(--rojo);
+}
+
+/* ---------------------------------------------------------------------
+   20. Pie de página
+       position + z-index: el pie se pinta por encima del índice fijo
+       (sticky), que de otro modo lo taparía al llegar al final.
+   --------------------------------------------------------------------- */
+body > footer {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--e2) var(--e4);
+  padding: var(--e4) var(--e3);
+  background-color: var(--cabecera-fondo);
+  color: var(--cabecera-suave);
+  font-size: 0.9375rem;
+}
+
+body > footer address {
+  font-style: normal;
+}
+
+body > footer strong {
+  color: var(--cabecera-texto);
+}
+
+body > footer p {
+  margin: 0;
+}
+
+body > footer a {
+  color: var(--cabecera-texto);
+}
+
+/* Derechos de autor: línea final, separada del resto */
+body > footer p:has(small) {
+  grid-column: 1 / -1;
+  padding-top: var(--e2);
+  border-top: 1px solid #2C3E57;
+}
+
+body > footer small {
+  font-size: 0.875rem;
+}
+
+@media (min-width: 60rem) {
+  body > footer {
+    grid-template-columns: auto auto 1fr;
+    padding-inline: var(--e4);
+  }
+
+  body > footer > p:nth-of-type(2) {
+    justify-self: end;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   21. Impresión: sin índice ni fondos oscuros
+   --------------------------------------------------------------------- */
+@media print {
+  body {
+    display: block;
+    background: #FFFFFF;
+    color: #000000;
+  }
+
+  body > nav,
+  body > a:first-child {
+    display: none;
+  }
+
+  body > header,
+  body > footer {
+    background: none;
+    color: #000000;
+  }
+
+  pre {
+    white-space: pre-wrap;
+  }
+}
